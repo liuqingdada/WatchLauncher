@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.liuqing.app.launcher"
+          android:sharedUserId="android.uid.system">
+
+    <uses-sdk
+        android:minSdkVersion="22"
+        android:targetSdkVersion="25"/>
+
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER_COMPONENT"/>
+    <uses-permission android:name="android.permission.BIND_WALLPAPER"/>
+    <uses-permission android:name="android.permission.REBOOT"/>
+    <uses-permission android:name="android.permission.DEVICE_POWER"/>
+    <uses-permission android:name="android.permission.SHUTDOWN"/>
+    <uses-permission android:name="android.permission.RECOVERY"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+    <uses-permission android:name="android.permission.BIND_APPWIDGET"/>
+    <uses-permission android:name="android.permission.STOP_APP_SWITCHES"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SET_TIME"/>
+    <uses-permission android:name="android.permission.SET_TIME_ZONE"/>
+
+    <application
+        android:name=".modules.launch.App"
+        android:allowBackup="true"
+        android:clearTaskOnLaunch="true"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:launchMode="singleTask"
+        android:persistent="true"
+        android:resumeWhilePausing="false"
+        android:screenOrientation="nosensor"
+        android:stateNotNeeded="true"
+        android:supportsRtl="true"
+        android:taskAffinity=""
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustPan">
+        <activity
+            android:name=".modules.launch.LauncherActivity"
+            android:theme="@style/LauncherTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.MONKEY"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- <service -->
+        <!-- android:name=".modules.notification.NotificationMonitorService" -->
+        <!-- android:label="@string/app_notification" -->
+        <!-- android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.service.notification.NotificationListenerService"/> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <service
+            android:name=".modules.notification.NotificationMonitorService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".modules.notification.SystemNotificationService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".modules.watchface.WatchFaceService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity
+            android:name=".test.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".modules.watchface.WatchFaceSelectActivity"
+            android:theme="@style/WatchFaceSelectTheme">
+        </activity>
+        <activity android:name=".modules.mvptest.view.LoginActivity">
+        </activity>
+    </application>
+
+</manifest>

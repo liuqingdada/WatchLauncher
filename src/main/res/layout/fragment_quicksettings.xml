@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- abandon -->
+<!-- abandon -->
+<!-- abandon -->
+<!--<com.liuqing.app.launcher.customview.viewpager.recyclerviewpager.RecyclerViewPager-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/quicksettings_viewpager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@android:color/holo_green_dark"-->
+    <!--android:clipToPadding="false"-->
+    <!--app:rvp_singlePageFling="true"-->
+    <!--app:rvp_triggerOffset="0.1"-->
+    <!--tools:contecom.liuqing.app.launcher.modules.launcher.LauncherActivityvity">-->
+
+<!--</com.liuqing.app.launcher.customview.viewpager.recyclerviewpager.RecyclerViewPager>-->
+
+<cn.youngkaaa.yviewpager.YViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quicksettings_viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_green_dark"
+    tools:context="com.liuqing.app.launcher.modules.launch.LauncherActivity">
+
+</cn.youngkaaa.yviewpager.YViewPager>

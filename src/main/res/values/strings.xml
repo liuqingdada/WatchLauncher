@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">App.Launcher</string>
+    <string name="app_notification">通知</string>
+
+    <string name="loading">loading…</string>
+
+    <string name="hello">Hello World!</string>
+    <string name="long_hello">Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!Hello World!  Hello World!</string>
+    <string name="add_notification">AddNotification</string>
+    <string name="install_apk">InstallApk</string>
+    <string name="os_api_setbklight">OsApiSetBkLight</string>
+
+    <string name="shut_down">shut_down</string>
+    <string name="reboot">reboot</string>
+    <string name="factory_restore">factory_restore</string>
+
+    <string name="item_delete">删除</string>
+    <string name="item_add">添加</string>
+    <string name="title_activity_test">TestActivity</string>
+
+    <string name="mobile_data">数据开关</string>
+    <string name="system_time">系统时间</string>
+    <string name="system_timezone">系统时区</string>
+    <string name="system_time_auto">自动确定时间</string>
+    <string name="system_timezone_auto">自动确定时区</string>
+    <string name="system_time_is24">是否24小时制</string>
+</resources>

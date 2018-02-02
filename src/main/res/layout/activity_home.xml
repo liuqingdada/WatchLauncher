@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.liuqing.app.launcher.customview.viewpager.HorizontalViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.liuqing.app.launcher.modules.launch.LauncherActivity">
+
+</com.liuqing.app.launcher.customview.viewpager.HorizontalViewPager>

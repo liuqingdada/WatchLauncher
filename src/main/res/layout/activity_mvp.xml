@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.liuqing.app.launcher.modules.mvptest.view.LoginActivity">
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/hello"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/shut_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/shut_down"
+        app:layout_constraintStart_toEndOf="@+id/bt_login"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/reboot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/reboot"
+        app:layout_constraintStart_toEndOf="@+id/shut_down"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/factory_restore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/factory_restore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_login"/>
+
+    <Button
+        android:id="@+id/mobile_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/mobile_data"
+        app:layout_constraintStart_toEndOf="@+id/factory_restore"
+        app:layout_constraintTop_toBottomOf="@+id/reboot"/>
+
+    <Button
+        android:id="@+id/system_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/system_time"
+        app:layout_constraintStart_toEndOf="@+id/mobile_data"
+        app:layout_constraintTop_toBottomOf="@+id/reboot"/>
+
+    <Button
+        android:id="@+id/system_timezone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/system_timezone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/factory_restore"/>
+
+    <Button
+        android:id="@+id/system_time_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/system_time_auto"
+        app:layout_constraintStart_toEndOf="@+id/system_timezone"
+        app:layout_constraintTop_toBottomOf="@+id/factory_restore"/>
+
+    <Button
+        android:id="@+id/system_timezone_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/system_timezone_auto"
+        app:layout_constraintStart_toEndOf="@+id/system_time_auto"
+        app:layout_constraintTop_toBottomOf="@+id/system_time"/>
+
+    <Button
+        android:id="@+id/system_time_is24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/system_time_is24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/system_timezone"/>
+</android.support.constraint.ConstraintLayout>
