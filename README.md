@@ -5,3 +5,4 @@ this is a system app, based on android 5.1
 系统设置；
 注册系统服务，通知监听；
 动态壁纸切换。
+![image](https://github.com/liuqingdada/WatchLauncher/blob/master/screenshot/mstarc_5s.gif)
