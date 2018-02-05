@@ -15,13 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LauncherActivity extends AppCompatActivity {
+    private static final String TAG = "LauncherActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // register rxbus
+
         super.onCreate(savedInstanceState);
+
         // 判断进入home还是fte
         // 先假设直接进入home
         goHome();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void goFte() {

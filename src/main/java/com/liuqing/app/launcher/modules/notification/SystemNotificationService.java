@@ -15,39 +15,57 @@ import android.util.Log;
 
 import com.liuqing.app.launcher.INotificationInterface;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class SystemNotificationService extends NotificationListenerService {
     private static final String TAG = SystemNotificationService.class.getSimpleName();
     private INotificationManager mINotificationManager;
     private WatchNotificationInterface mWatchNotificationBinder;
-    private RemoteCallbackList<INotificationInterface> mINotificationBinders;
+    private List<INotificationInterface> mINotificationBinders;
+    private ExecutorService serviceCallback = Executors.newFixedThreadPool(2);
 
     @Override
-    public void onNotificationPosted(StatusBarNotification sbn) {
+    public void onNotificationPosted(final StatusBarNotification sbn) {
         super.onNotificationPosted(sbn);
-        final int N = getINotificationBinders().beginBroadcast();
-        for (int i = 0; i < N; i++) {
-            try {
-                getINotificationBinders().getBroadcastItem(i)
-                                         .onNotificationPosted(sbn);
-            } catch (Exception e) {
-                Log.e(TAG, "onNotificationPosted: ", e);
+        serviceCallback.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (INotificationInterface notificationInterface : getINotificationBinders()) {
+                    try {
+                        notificationInterface.onNotificationPosted(sbn);
+                    } catch (RemoteException e) {
+                        Log.e(TAG, "run onNotificationPosted: ", e);
+                    } catch (Exception e) {
+                        getINotificationBinders().remove(notificationInterface);
+                        Log.w(TAG, "run onNotificationPosted: remove one");
+                    }
+                }
             }
-        }
+        });
         Log.d(TAG, "onNotificationPosted: " + sbn.toString());
     }
 
     @Override
-    public void onNotificationRemoved(StatusBarNotification sbn) {
+    public void onNotificationRemoved(final StatusBarNotification sbn) {
         super.onNotificationRemoved(sbn);
-        final int N = getINotificationBinders().beginBroadcast();
-        for (int i = 0; i < N; i++) {
-            try {
-                getINotificationBinders().getBroadcastItem(i)
-                                         .onNotificationRemoved(sbn);
-            } catch (Exception e) {
-                Log.e(TAG, "onNotificationRemoved: ", e);
+        serviceCallback.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (INotificationInterface notificationInterface : getINotificationBinders()) {
+                    try {
+                        notificationInterface.onNotificationRemoved(sbn);
+                    } catch (RemoteException e) {
+                        Log.e(TAG, "run onNotificationRemoved: ", e);
+                    } catch (Exception e) {
+                        getINotificationBinders().remove(notificationInterface);
+                        Log.w(TAG, "run onNotificationRemoved: remove one");
+                    }
+                }
             }
-        }
+        });
         Log.v(TAG, "onNotificationRemoved: " + sbn.toString());
     }
 
@@ -69,15 +87,15 @@ public class SystemNotificationService extends NotificationListenerService {
     public void onDestroy() {
         super.onDestroy();
         unregisterNotification();
-        getINotificationBinders().kill();
+        getINotificationBinders().clear();
         startServiceAsUser(new Intent(this, SystemNotificationService.class),
                            UserHandle.CURRENT_OR_SELF);
         Log.i(TAG, "onDestroy: ");
     }
 
-    private RemoteCallbackList<INotificationInterface> getINotificationBinders() {
+    private List<INotificationInterface> getINotificationBinders() {
         if (mINotificationBinders == null) {
-            mINotificationBinders = new RemoteCallbackList<>();
+            mINotificationBinders = new CopyOnWriteArrayList<>();
         }
         return mINotificationBinders;
     }
@@ -118,7 +136,8 @@ public class SystemNotificationService extends NotificationListenerService {
 
         @Override
         public void setINotificationListener(INotificationInterface inl) throws RemoteException {
-            getINotificationBinders().register(inl);
+            getINotificationBinders().add(inl);
+            Log.d(TAG, "INotificationListeners size is: " + getINotificationBinders().size());
         }
     }
 

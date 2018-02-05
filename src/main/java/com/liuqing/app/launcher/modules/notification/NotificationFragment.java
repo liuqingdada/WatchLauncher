@@ -1,15 +1,9 @@
 package com.liuqing.app.launcher.modules.notification;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +20,7 @@ import android.widget.Toast;
 import com.liuqing.app.launcher.INotificationInterface;
 import com.liuqing.app.launcher.R;
 import com.liuqing.app.launcher.customview.utils.PsUtils;
+import com.liuqing.app.launcher.modules.launch.App;
 import com.liuqing.app.launcher.modules.notification.bean.WatchNotification;
 import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
@@ -59,7 +54,9 @@ public class NotificationFragment extends Fragment implements SwipeItemClickList
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        performNotificationService();
+
+        App app = (App) getActivity().getApplication();
+        app.setINI(mNotificationInterface);
     }
 
     @Nullable
@@ -280,39 +277,5 @@ public class NotificationFragment extends Fragment implements SwipeItemClickList
 
         @Override
         public void setINotificationListener(INotificationInterface inl) throws RemoteException {}
-    };
-
-    private void performNotificationService() {
-        try {
-            Intent intent = new Intent(getActivity(), SystemNotificationService.class);
-            getActivity().startServiceAsUser(intent, UserHandle.CURRENT_OR_SELF);
-            getActivity().bindServiceAsUser(intent,
-                                            mNotificationInterfaceConn,
-                                            Context.BIND_AUTO_CREATE,
-                                            UserHandle.CURRENT_OR_SELF);
-        } catch (Exception e) {
-            Log.e(TAG, "performNotificationService: ", e);
-        }
-    }
-
-    private ServiceConnection mNotificationInterfaceConn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.i(TAG, "onServiceConnected: INotificationInterfaceConn");
-            SystemNotificationService.WatchNotificationInterface watchNotificationBinder =
-                    (SystemNotificationService.WatchNotificationInterface)
-                            INotificationInterface.Stub.asInterface(service);
-            try {
-                watchNotificationBinder.setINotificationListener(mNotificationInterface);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            Log.w(TAG, "onServiceDisconnected: INotificationInterfaceConn");
-            performNotificationService();
-        }
     };
 }
